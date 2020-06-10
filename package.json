@@ -1,0 +1,36 @@
+{
+  "name": "@zwzou/json2excel",
+  "version": "1.0.0",
+  "description": "A tool for converting JSON and excel file formats",
+  "main": "index.js",
+  "bin": {
+    "json-2-excel": "bin/json2excel"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zwzou/json2excel.git"
+  },
+  "keywords": [
+    "json",
+    "excel"
+  ],
+  "author": "zwzou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zwzou/json2excel/issues"
+  },
+  "homepage": "https://github.com/zwzou/json2excel#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "co": "^4.6.0",
+    "co-prompt": "^1.0.0",
+    "commander": "^5.1.0",
+    "csvtojson": "^2.0.10",
+    "glob": "^7.1.6",
+    "json2csv": "^5.0.1",
+    "ora": "^4.0.4"
+  }
+}
