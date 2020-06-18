@@ -4,7 +4,7 @@
   "description": "A tool for converting JSON and excel file formats",
   "main": "index.js",
   "bin": {
-    "json2excel": "./bin/json2excel.js"
+    "json2excel": "bin/json2excel.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
