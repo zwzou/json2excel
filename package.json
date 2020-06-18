@@ -1,10 +1,10 @@
 {
   "name": "@zwzou/json2excel",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "A tool for converting JSON and excel file formats",
   "main": "index.js",
   "bin": {
-    "json-2-excel": "bin/json2excel"
+    "json2excel": "./bin/json2excel.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

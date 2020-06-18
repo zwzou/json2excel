@@ -32,14 +32,25 @@ module.exports = (paths) => {
       let jsonData = fs.readFileSync(files[filename])
       jsonData = JSON.parse(jsonData)
 
-      // 整理格式,把json对象转化成CSV能接受的格式
-      const jData = Object.keys(jsonData).map(key => ({
-        key: key,
-        value: jsonData[key]
-      }))
+      /*
+      * 判断csv能接受的数据结构
+      * 如果是json对象,则取key, value作为列
+      * 如果是json数组，则读取第一行的所有key
+      * */
+      let jData, fields
+      if(Object.prototype.toString.call(jsonData) === '[object Object]') {
+        jData = Object.keys(jsonData).map(key => ({
+          key: key,
+          value: jsonData[key]
+        }))
+        fields = ['key', 'value']
+      }
+      if(Object.prototype.toString.call(jsonData) === '[object Array]') {
+        jData = jsonData
+        fields = Object.keys(jsonData[0])
+      }
 
-      // json2csv接受的字段
-      const fields = ['key', 'value']
+      // json格式 => csv格式
       const json2csvParser = new Json2csvParser({fields})
       const csvData = json2csvParser.parse(jData)
 
@@ -66,7 +77,7 @@ module.exports = (paths) => {
 
     // 提示输出的文件目录
     console.log('\n ')
-    console.log(chalk.blue(`- Please go to check the file: ${chalk.underline(path.resolve(__dirname, outPath))}`))
+    console.log(chalk.blue(`- Please go to check the file: ${chalk.underline(path.join(process.cwd(), outPath))}`))
     process.exit()
   })
 }

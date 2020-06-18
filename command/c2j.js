@@ -29,12 +29,17 @@ module.exports = (paths) => {
 
     for(let filename in files) {
       yield csvtojson().fromFile(files[filename]).then(jsonObj => {
-        // 转换json文件的格式
-        jsonObj = jsonObj.reduce((obj, item) => ({
-          ...obj,
-          [item.key]: item.value
-        }), {})
+        /*
+        * 如果只有key, value两列，说明是json对象转化而来的，我们还是输出成对象的形式
+        * */
+        if(Object.keys(jsonObj[0]).join() === 'key,value') {
+          jsonObj = jsonObj.reduce((obj, item) => ({
+            ...obj,
+            [item.key]: item.value
+          }), {})
+        }
 
+        // json格式化
         jsonObj = JSON.stringify(jsonObj, undefined, 2)
 
         let outputFileName = `${outPath}/${filename}.json`
@@ -56,7 +61,7 @@ module.exports = (paths) => {
 
     // 提示输出的文件目录
     console.log('\n ')
-    console.log(chalk.blue(`- Please go to check the file: ${chalk.underline(path.resolve(__dirname, outPath))}`))
+    console.log(chalk.blue(`- Please go to check the file: ${chalk.underline(path.join(process.cwd(), outPath))}`))
     process.exit()
   })
 }
